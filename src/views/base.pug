@@ -1,0 +1,12 @@
+doctype html 
+html(lang="ko")
+    head
+        title #{pageTitle} | CSPW2S
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+    body
+        header
+        main
+            if errorMessage
+                h4=errorMessage
+            block content
+        include partials/footer 

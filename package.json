@@ -1,0 +1,35 @@
+{
+  "name": "cloud-security-platform-with-steampipe",
+  "version": "1.0.0",
+  "description": "cloud-security-platform-web-with-steampipe",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjsrkd3321/cloud-security-platform-web-with-steampipe"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/init.js"
+  },
+  "author": "cjsrkd3321",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cjsrkd3321/cloud-security-platform-web-with-steampipe/issues"
+  },
+  "homepage": "https://github.com/cjsrkd3321/cloud-security-platform-web-with-steampipe#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.1.4",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "nodemon": "^2.0.15"
+  }
+}

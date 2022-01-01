@@ -1,0 +1,11 @@
+extends base
+
+block content
+    form(method="POST")
+        input(placeholder="Username", name="username", type="text", required)
+        input(placeholder="Password", name="password", type="password", required)
+        input(type="submit", value="Login")
+    hr
+    div
+        span Don't have an account?&nbsp;
+        a(href="/join") Create one now &rarr;
