@@ -5,6 +5,10 @@ html(lang="ko")
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body
         header
+        if loggedIn
+            div(style="display: flex; justify-content: space-evenly;")
+                a(href="/") Home
+                a(href="/logout") Logout
         main
             if errorMessage
                 h4=errorMessage

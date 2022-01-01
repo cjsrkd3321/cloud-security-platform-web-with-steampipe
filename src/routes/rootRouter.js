@@ -3,6 +3,7 @@ import {
   getJoin,
   getLogin,
   home,
+  logout,
   postJoin,
   postLogin,
 } from '../controllers/userController';
@@ -17,5 +18,6 @@ rootRouter
   .all(publicOnlyMiddleware)
   .get(getLogin)
   .post(postLogin);
+rootRouter.route('/logout').all(protectMiddleware).get(logout);
 
 export default rootRouter;
