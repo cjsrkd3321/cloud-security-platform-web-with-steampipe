@@ -8,6 +8,8 @@
     "url": "git+https://github.com/cjsrkd3321/cloud-security-platform-web-with-steampipe"
   },
   "scripts": {
+    "start": "node build/init.js",
+    "build:server": "babel src -d build",
     "dev": "nodemon --exec babel-node src/init.js"
   },
   "author": "cjsrkd3321",
@@ -28,6 +30,7 @@
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.7",
     "@babel/core": "^7.16.7",
     "@babel/node": "^7.16.7",
     "@babel/preset-env": "^7.16.7",

@@ -3,7 +3,9 @@ echo DB_URL=mongodb://mongodb/cspw2s >> .env
 echo SP_HOST=steampipe >> .env
 echo SP_PASSWORD=$(uuidgen) >> .env
 
-docker-compose build --no-cache
+npm run build:server
+
+docker-compose build
 docker-compose up -d
 
 docker exec -it steampipe steampipe plugin install steampipe && docker exec -it steampipe steampipe plugin install aws
