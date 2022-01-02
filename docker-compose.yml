@@ -10,6 +10,7 @@ services:
       - 2000:2000
     depends_on:
       - mongodb
+      - steampipe
   mongodb:
     image: mongo
     restart: on-failure
@@ -17,5 +18,9 @@ services:
   steampipe:
     image: turbot/steampipe
     container_name: 'steampipe'
+    environment:
+      STEAMPIPE_DATABASE_PASSWORD: ${SP_PASSWORD}
     restart: on-failure
+    volumes:
+      - ./credentials:/home/steampipe/.aws/credentials
     command: ['service', 'start', '--foreground']
