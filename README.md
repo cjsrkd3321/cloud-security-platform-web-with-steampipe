@@ -1,5 +1,9 @@
 # cloud-security-platform-web-with-steampipe
 
+## Home
+
+![home](./images/home.png)
+
 ## Tech Stacks
 
 - Node.js + MongoDB + Steampipe
