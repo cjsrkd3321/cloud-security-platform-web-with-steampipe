@@ -1,4 +1,15 @@
 extends base
+include mixins/row
 
 block content
-    h1 hello #{loggedInUser.username}
+    table
+        thead
+            th(style="text-align: center;") ARN 
+            th(style="text-align: center;") ORG_ID
+            th(style="text-align: center;") ORG_MASTER_ID
+        tbody
+            tr 
+                each row in rows 
+                    +row(row)
+                else 
+                    h3 Nothing

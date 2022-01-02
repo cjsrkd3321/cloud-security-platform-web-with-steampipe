@@ -3,12 +3,13 @@ html(lang="ko")
     head
         title #{pageTitle} | CSPW2S
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
-    body
+    body(style="display: flex; flex-direction: column;")
         header
-        if loggedIn
-            div(style="display: flex; justify-content: space-evenly;")
-                a(href="/") Home
-                a(href="/logout") Logout
+            h1 Hello, #{loggedInUser.username}
+            if loggedIn
+                div(style="display: flex; justify-content: space-evenly;")
+                    a(href="/") Home
+                    a(href="/logout") Logout
         main
             if errorMessage
                 h4=errorMessage

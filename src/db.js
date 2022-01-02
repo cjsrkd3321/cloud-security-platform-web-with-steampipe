@@ -10,7 +10,7 @@ db.on('error', (err) => console.error('[MongoDB] DB Error', err));
 db.once('open', () => console.log('[MongoDB] 🚀 Connected to DB'));
 
 // PostgreSQL
-const pg = new Client({
+export const pg = new Client({
   user: 'steampipe',
   host: process.env.SP_HOST,
   database: 'steampipe',

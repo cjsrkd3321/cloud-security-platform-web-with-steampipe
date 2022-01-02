@@ -1,7 +1,13 @@
 import bcrypt from 'bcryptjs/dist/bcrypt';
+import { pg } from '../db';
 import User from '../models/User';
 
-export const home = (req, res) => res.render('home', { pageTitle: 'Home' });
+export const home = async (req, res) => {
+  const testData = await pg.query('SELECT * FROM aws_account');
+  const rows = testData.rows;
+
+  res.render('home', { pageTitle: 'Home', rows });
+};
 
 export const getJoin = (req, res) => res.render('join', { pageTitle: 'Join' });
 
