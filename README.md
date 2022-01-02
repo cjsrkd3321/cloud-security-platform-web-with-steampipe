@@ -15,5 +15,5 @@ $ curl http://localhost:2000
 
 ## Additional information
 
-- If you can use instance-profile(ex. EC2 etc...) no need credentials
+- If you can use instance-profile(ex. EC2 etc...) no need credentials.
 - [Steampipe Docs](https://steampipe.io/docs)
