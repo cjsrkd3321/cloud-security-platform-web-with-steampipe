@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import rootRouter from './routes/rootRouter';
 
 import { localsMiddleware, notFoundMiddleware } from './middlewares';
+import awsRouter from './routes/awsRouter';
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(
 
 app.use(localsMiddleware);
 app.use('/', rootRouter);
+app.use('/aws', awsRouter);
 
 app.use(notFoundMiddleware);
 
