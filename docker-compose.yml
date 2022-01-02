@@ -1,14 +1,21 @@
-version: '3'
+version: '3.9'
 services:
   app:
     build:
       context: .
     image: cspw2s
     container_name: 'cspw2s'
+    restart: on-failure
     ports:
       - 2000:2000
     depends_on:
       - mongodb
   mongodb:
     image: mongo
+    restart: on-failure
     container_name: 'mongo'
+  steampipe:
+    image: turbot/steampipe
+    container_name: 'steampipe'
+    restart: on-failure
+    command: ['service', 'start', '--foreground']
