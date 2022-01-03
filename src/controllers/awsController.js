@@ -1,8 +1,18 @@
 import { pg } from '../db';
 
 export const awsHome = async (req, res) => {
-  const testData = await pg.query('SELECT * FROM aws_account');
-  const rows = testData.rows;
+  const pageTitle = 'Cloud-Home';
+  let rows = [];
 
-  res.render('cloud-home', { pageTitle: 'Cloud-Home', rows });
+  try {
+    const testData = await pg.query('SELECT * FROM aws.aws_account');
+    rows = testData.rows;
+  } catch (err) {
+    return res.status(400).render('cloud-home', {
+      pageTitle,
+      errorMessage: `[aws][awsHome] ${err}`,
+    });
+  }
+
+  return res.render('cloud-home', { pageTitle, rows });
 };
