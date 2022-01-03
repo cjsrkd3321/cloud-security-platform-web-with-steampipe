@@ -16,6 +16,7 @@ export const pg = new Client({
   database: 'steampipe',
   password: process.env.SP_PASSWORD,
   port: 9193,
+  query_timeout: 1000 * 60, // 1 min
 });
 
 pg.connect((err) => {
