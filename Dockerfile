@@ -4,11 +4,13 @@ LABEL name="cjsrkd3321"
 
 WORKDIR /usr/app
 
-COPY build/ ./build/
-COPY src/views/ ./src/views/
+COPY src/ ./src/
 COPY package*.json ./
+COPY babel.config.json ./
 COPY .env ./
 RUN npm install
+
+RUN npm run build:server
 
 EXPOSE 2000
 

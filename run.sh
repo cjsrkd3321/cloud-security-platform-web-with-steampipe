@@ -3,8 +3,6 @@ echo DB_URL=mongodb://mongodb/cspw2s >> .env
 echo SP_HOST=steampipe >> .env
 echo SP_PASSWORD=$(uuidgen) >> .env
 
-npm run build:server
-
 docker-compose build
 docker-compose up -d
 
