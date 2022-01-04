@@ -10,7 +10,18 @@
 
 ## Usage
 
+- If you use ec2, no need credentils, config files.
+
 ```bash
+$ cd terraform
+$ terraform apply # Modify code on your environment fittly.
+
+...
+Access your ec2 using Session Manager.
+Execute the command below.
+You may need sudo command.(ex. sudo ./run.sh)
+...
+
 $ ./run.sh
 $ curl http://localhost:2000
 
