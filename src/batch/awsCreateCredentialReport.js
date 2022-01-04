@@ -2,7 +2,7 @@ import {
   GenerateCredentialReportCommand,
   GetCredentialReportCommand,
 } from '@aws-sdk/client-iam';
-import { iamClient } from '../libs/iamClient.js';
+import { iamClient } from '../libs/iamClient';
 
 const SEC = 1000;
 const MIN = 60 * SEC;
