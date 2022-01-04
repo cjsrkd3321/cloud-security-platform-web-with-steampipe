@@ -8,6 +8,9 @@ services:
     restart: on-failure
     ports:
       - 2000:2000
+    volumes:
+      - ./credentials:/root/.aws/credentials
+      - ./config:/root/.aws/config
     depends_on:
       - mongodb
       - steampipe
