@@ -8,13 +8,13 @@ const SEC = 1000;
 const MIN = 60 * SEC;
 const HOUR = 60 * MIN;
 
-let remainedTime = 4 * HOUR;
-
 const createCredentialReport = async () => {
+  let remainedTime = 4 * HOUR;
+
   try {
     const data = await iamClient.send(new GetCredentialReportCommand());
     remainedTime = Math.floor(
-      (4 * HOUR - (Date.now() - Date.parse(data.GeneratedTime))) / SEC
+      4 * HOUR - (Date.now() - Date.parse(data.GeneratedTime))
     );
     return;
   } catch (err) {
@@ -24,8 +24,9 @@ const createCredentialReport = async () => {
         return;
       }
     }
+  } finally {
+    setTimeout(createCredentialReport, remainedTime);
   }
 };
 
-createCredentialReport();
-setInterval(createCredentialReport, remainedTime);
+setTimeout(createCredentialReport, SEC);
