@@ -1,7 +1,7 @@
 import { pg } from '../db';
 import { DEFAULT_TTL } from '../libs/time';
 
-export const awsAccount = async (req, res) => {
+export const awsAccount = async () => {
   try {
     await pg.query('SELECT * FROM aws.aws_account');
   } catch (err) {
