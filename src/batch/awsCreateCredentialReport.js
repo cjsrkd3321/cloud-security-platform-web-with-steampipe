@@ -3,10 +3,7 @@ import {
   GetCredentialReportCommand,
 } from '@aws-sdk/client-iam';
 import { iamClient } from '../libs/iamClient';
-
-const SEC = 1000;
-const MIN = 60 * SEC;
-const HOUR = 60 * MIN;
+import { HOUR, SECOND } from '../libs/time';
 
 const createCredentialReport = async () => {
   let remainedTime = 4 * HOUR;
@@ -29,4 +26,4 @@ const createCredentialReport = async () => {
   }
 };
 
-setTimeout(createCredentialReport, SEC);
+setTimeout(createCredentialReport, SECOND);
