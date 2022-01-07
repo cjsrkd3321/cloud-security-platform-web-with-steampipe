@@ -79,7 +79,9 @@ typings/
 credentials
 config
 
+# My gitignore 
 /build
+/assets
 
 # Terraform
 .terraform.lock.hcl

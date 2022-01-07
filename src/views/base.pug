@@ -3,6 +3,7 @@ html(lang="ko")
     head
         title #{pageTitle} | CSPW2S
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+        link(rel="stylesheet", href="/static/css/styles.css")
     body(style="display: flex; flex-direction: column;")
         header
             h1 Hello, #{loggedInUser.username}
@@ -16,3 +17,4 @@ html(lang="ko")
                 h4=errorMessage
             block content
         include partials/footer 
+        script(src="/static/js/main.js")
