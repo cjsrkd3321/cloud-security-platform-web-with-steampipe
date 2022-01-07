@@ -1,11 +1,12 @@
 import { pg } from '../db';
+import { awsAccount } from '../queries/aws';
 
 export const awsHome = async (req, res) => {
   const pageTitle = 'Cloud-Home';
   let rows = [];
 
   try {
-    const testData = await pg.query('SELECT * FROM aws.aws_account');
+    const testData = await pg.query(awsAccount);
     rows = testData.rows;
   } catch (err) {
     return res.status(400).render('cloud-home', {
