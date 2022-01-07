@@ -3,10 +3,10 @@ import express from 'express';
 import session from 'express-session';
 import morgan from 'morgan';
 
-import rootRouter from './routes/rootRouter';
+import rootRouter from './routers/rootRouter';
 
 import { localsMiddleware, notFoundMiddleware } from './middlewares';
-import awsRouter from './routes/awsRouter';
+import awsRouter from './routers/awsRouter';
 
 const app = express();
 
