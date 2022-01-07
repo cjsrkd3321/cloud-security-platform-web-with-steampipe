@@ -1,4 +1,4 @@
 mixin row(row)
-    td=row.arn
-    td=row.organization_id 
-    td=row.organization_master_account_id
+    tr(style="background-color: rgba(0, 0, 0, 0.2);")
+        each val, _ in row
+            td=val

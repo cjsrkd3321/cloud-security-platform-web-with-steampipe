@@ -1,6 +1,14 @@
 @import './_variables';
 
 body {
-  background-color: $red;
+  background-color: $bg-color;
   color: $color;
+}
+
+table {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+th,
+td {
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }

@@ -4,12 +4,11 @@ include mixins/row
 block content
     table
         thead
-            th(style="text-align: center;") ARN 
-            th(style="text-align: center;") ORG_ID
-            th(style="text-align: center;") ORG_MASTER_ID
-        tbody
-            tr 
-                each row in rows 
-                    +row(row)
-                else 
-                    h3 Nothing
+            each row, index in rows
+                if !index
+                    each val, key in row
+                        th(style="text-align: center;")=key
+        each row in rows 
+            +row(row)
+        else 
+            h3 Nothing
