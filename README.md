@@ -26,6 +26,8 @@ Execute the command below.
 You may need sudo command.(ex. sudo ./run.sh)
 ...
 
+$ git pull https://github.com/cjsrkd3321/cloud-security-platform-web-with-steampipe
+$ cd cloud-security-platform-web-with-steampipe
 $ ./run.sh
 $ curl http://localhost:2000
 
