@@ -12,7 +12,11 @@ export const awsAccount = `
 // IAM
 export const awsIamPolicy = `
     SELECT 
-      * 
+      account_id,
+      create_date,
+      title,
+      is_attachable,
+      is_attached
     FROM 
       aws.aws_iam_policy 
     WHERE 

@@ -11,7 +11,7 @@ class Batch {
 
   static async querySteampipe() {
     try {
-      const data = await pg.query(Batch.#query);
+      await pg.query(Batch.#query);
     } catch (err) {
       console.error(err);
     } finally {
