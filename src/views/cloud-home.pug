@@ -2,7 +2,7 @@ extends base
 include mixins/row
 
 block content
-    div(style="width: 100%; display: grid; grid-template-columns: repeat(3, 1fr);")
+    div(style="width: 1200px; display: grid; grid-template-columns: repeat(3, 1fr);")
         each query in queries
             a(href=`/aws/${query}`, style="margin: 0 auto;")=query
         else
