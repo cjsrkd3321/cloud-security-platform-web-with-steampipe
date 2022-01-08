@@ -13,6 +13,10 @@
 - If you use ec2, no need credentils, config files.
 
 ```bash
+##### Development #####
+$ ./dev-run.sh # Before, You have to install NodeJS, Steampipe, MongoDB on your local machine.
+
+##### Production #####
 $ cd terraform
 $ terraform apply # Modify code on your environment fittly.
 
