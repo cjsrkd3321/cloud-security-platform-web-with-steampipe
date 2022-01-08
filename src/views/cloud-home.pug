@@ -2,13 +2,8 @@ extends base
 include mixins/row
 
 block content
-    table
-        thead
-            each row, index in rows
-                if !index
-                    each val, key in row
-                        th(style="text-align: center;")=key
-        each row in rows 
-            +row(row)
-        else 
-            h3 Nothing
+    div(style="width: 100%; display: grid; grid-template-columns: repeat(3, 1fr);")
+        each query in queries
+            a(href=`/aws/${query}`, style="margin: 0 auto;")=query
+        else
+            h3 No tables.

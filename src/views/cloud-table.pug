@@ -1,0 +1,15 @@
+extends base
+include mixins/row
+
+block content
+    div(style="display: flex; justify-content: center;")
+        table
+            thead
+                each row, index in rows
+                    if !index
+                        each val, key in row
+                            th(style="text-align: center;")=key
+            each row in rows 
+                +row(row)
+            else 
+                h3 Nothing
