@@ -1,34 +1,56 @@
 // Account
-export const awsAccount = `
-    SELECT 
-      organization_id, 
-      organization_master_account_id, 
-      organization_master_account_email, 
-      account_id 
-    FROM 
-      aws.aws_account
-  `;
 
 // IAM
-export const awsIamPolicy = `
-    SELECT 
-      account_id,
-      create_date,
-      title,
-      is_attachable,
-      is_attached
-    FROM 
-      aws.aws_iam_policy 
-    WHERE 
-      is_aws_managed IS false
-  `;
-export const awsIamRole = `
-    SELECT 
-      account_id, 
-      name, 
-      path 
-    FROM 
-      aws.aws_iam_role 
-    WHERE 
-      path NOT LIKE '/aws-%'
-  `;
+export const IAM_NO_MFA_USER = `
+  SELECT 
+    user_arn, 
+    password_enabled, 
+    mfa_active 
+  FROM 
+    aws_iam_credential_report 
+  WHERE mfa_active IS false
+`;
+
+// VPC
+export const VPC_SG_INGRESS_ANY_OPEN = `
+  SELECT 
+    group_name, 
+    group_id, 
+    vpc_id, 
+    owner_id, 
+    ip_protocol, 
+    from_port, 
+    to_port, 
+    cidr_ip, 
+    cidr_ipv6
+  FROM 
+    aws_vpc_security_group_rule 
+  WHERE 
+    type = 'ingress' 
+    and (cidr_ip = '0.0.0.0/0' or cidr_ipv6 = '::/0')
+`;
+
+// EC2
+export const EC2_OPTIONAL_IMDS = `
+  SELECT
+    arn, 
+    instance_id, 
+    metadata_options ->> 'HttpTokens' as HttpTokens, 
+    metadata_options ->> 'HttpPutResponseHopLimit' as HopLimit 
+  FROM 
+    aws_ec2_instance
+  WHERE
+    metadata_options ->> 'HttpEndpoint' = 'enabled'
+`;
+
+export const EC2_PUBLIC_IP = `
+  SELECT 
+    arn, 
+    instance_id, 
+    private_ip_address, 
+    public_ip_address 
+  FROM 
+    aws_ec2_instance 
+  WHERE 
+    public_ip_address IS NOT null
+`;
