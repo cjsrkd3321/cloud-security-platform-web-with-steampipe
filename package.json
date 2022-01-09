@@ -9,9 +9,11 @@
   },
   "scripts": {
     "start": "node build/init.js",
+    "build": "npm run build:server && npm run build:assets",
     "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
-    "dev:assets": "webpack"
+    "dev:assets": "webpack --mode=development --watch"
   },
   "author": "cjsrkd3321",
   "license": "ISC",

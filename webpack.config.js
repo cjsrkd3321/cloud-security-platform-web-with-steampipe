@@ -8,8 +8,6 @@ module.exports = {
       filename: 'css/styles.css',
     }),
   ],
-  mode: 'development',
-  watch: true,
   output: {
     filename: 'js/main.js',
     path: path.resolve(__dirname, 'assets'),

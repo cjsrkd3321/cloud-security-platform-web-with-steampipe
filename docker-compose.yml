@@ -23,6 +23,7 @@ services:
     container_name: 'steampipe'
     environment:
       STEAMPIPE_DATABASE_PASSWORD: ${SP_PASSWORD}
+      AWS_DEFAULT_REGION: 'ap-northeast-2'
     restart: on-failure
     volumes:
       - ./credentials:/home/steampipe/.aws/credentials
