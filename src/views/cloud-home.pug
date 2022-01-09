@@ -2,8 +2,10 @@ extends base
 include mixins/row
 
 block content
-    div(style="width: 1200px; display: grid; grid-template-columns: repeat(3, 1fr);")
+    div(style="display: flex; justify-content: center; margin-bottom: 20px;")
+        input(type="text", placeholder="Search compliance...").search
+    div(style="width: 1200px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 40px;").tables
         each query in queries
-            a(href=`/aws/${query}`, style="margin: 0 auto;")=query
+            a(href=`/aws/${query}`, style="margin: 0 auto;").table=query
         else
             h3 No tables.

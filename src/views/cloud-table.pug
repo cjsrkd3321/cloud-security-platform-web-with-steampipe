@@ -3,7 +3,7 @@ include mixins/row
 
 block content
     div(style="display: flex; justify-content: center;")
-        table
+        table(style="border: 0;")
             thead
                 each row, index in rows
                     if !index
@@ -12,4 +12,4 @@ block content
             each row in rows 
                 +row(row)
             else 
-                h3 Nothing
+                h3 Result not found.
