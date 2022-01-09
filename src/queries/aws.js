@@ -7,7 +7,7 @@ export const IAM_NO_MFA_USER = `
     password_enabled, 
     mfa_active 
   FROM 
-    aws_iam_credential_report 
+    aws.aws_iam_credential_report 
   WHERE mfa_active IS false
 `;
 
@@ -24,7 +24,7 @@ export const VPC_SG_INGRESS_ANY_OPEN = `
     cidr_ip, 
     cidr_ipv6
   FROM 
-    aws_vpc_security_group_rule 
+    aws.aws_vpc_security_group_rule 
   WHERE 
     type = 'ingress' 
     and (cidr_ip = '0.0.0.0/0' or cidr_ipv6 = '::/0')
@@ -38,7 +38,7 @@ export const EC2_OPTIONAL_IMDS = `
     metadata_options ->> 'HttpTokens' as HttpTokens, 
     metadata_options ->> 'HttpPutResponseHopLimit' as HopLimit 
   FROM 
-    aws_ec2_instance
+    aws.aws_ec2_instance
   WHERE
     metadata_options ->> 'HttpEndpoint' = 'enabled'
 `;
@@ -50,7 +50,7 @@ export const EC2_PUBLIC_IP = `
     private_ip_address, 
     public_ip_address 
   FROM 
-    aws_ec2_instance 
+    aws.aws_ec2_instance 
   WHERE 
     public_ip_address IS NOT null
 `;
