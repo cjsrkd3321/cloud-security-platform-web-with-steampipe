@@ -2,14 +2,16 @@ extends base
 include mixins/row
 
 block content
-    div(style="display: flex; justify-content: center;")
+    div(style="display: flex; flex-direction: column; align-items: center;")
+        h3 #{complianceResult.title}
+        h4 Last updated : #{complianceResult.createdAt}
         table(style="border: 0;")
             thead
-                each row, index in rows
+                each result, index in complianceResult.results
                     if !index
-                        each val, key in row
+                        each val, key in result
                             th(style="text-align: center;")=key
-            each row in rows 
-                +row(row)
+            each result in complianceResult.results 
+                +row(result)
             else 
                 h3 Result not found.

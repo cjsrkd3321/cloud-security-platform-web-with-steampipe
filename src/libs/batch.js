@@ -1,5 +1,6 @@
 import { pg } from '../db';
 import { DEFAULT_TTL, SECOND } from '../libs/time';
+import Compliance from '../models/Compliance';
 import { isPluginExists } from '../queries/common';
 
 class Batch {
@@ -12,13 +13,23 @@ class Batch {
   static #cloud;
   static #queries;
 
-  static async querySteampipe(query) {
+  static async querySteampipe(title, query) {
     try {
-      await pg.query(query);
+      const results = (await pg.query(query)).rows;
+
+      (await Compliance.findOneAndUpdate(
+        { title },
+        { results, createdAt: Date.now() }
+      )) ??
+        (await Compliance.create({
+          title,
+          results,
+          createdAt: Date.now(),
+        }));
     } catch (err) {
       console.error(err);
     } finally {
-      setTimeout(Batch.querySteampipe, DEFAULT_TTL, query);
+      setTimeout(Batch.querySteampipe, DEFAULT_TTL, title, query);
     }
   }
 
@@ -32,7 +43,7 @@ class Batch {
     // If plugin installed
     if (result.rows[0]) {
       Object.keys(Batch.#queries).forEach((query) =>
-        Batch.querySteampipe(Batch.#queries[query])
+        Batch.querySteampipe(query, Batch.#queries[query])
       );
     } else {
       setTimeout(Batch.runBatch, 5 * SECOND);

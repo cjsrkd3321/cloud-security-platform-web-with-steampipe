@@ -1,4 +1,5 @@
 import { pg } from '../db';
+import Compliance from '../models/Compliance';
 import * as awsQueries from '../queries/aws';
 
 export const awsHome = async (req, res) => {
@@ -9,24 +10,30 @@ export const awsHome = async (req, res) => {
 export const awsTable = async (req, res) => {
   const { table } = req.params;
   const pageTitle = 'Cloud-Table';
-  let rows = [];
+  let complianceResult = {};
 
-  const query =
-    awsQueries[Object.keys(awsQueries).find((query) => query === table)];
-  if (!query) {
+  const title = Object.keys(awsQueries).find((query) => query === table);
+  if (!title) {
     return res.status(400).redirect('/aws');
   }
 
   try {
-    const queryResult = await pg.query(query);
-    rows = queryResult.rows;
+    const compliance = await Compliance.findOne({ title }).lean();
+    const { createdAt, results } = compliance;
+    complianceResult = { title, results, createdAt };
+    if (!compliance) {
+      return res.render('cloud-table', {
+        pageTitle,
+        complianceResult,
+      });
+    }
   } catch (err) {
     return res.status(400).render('cloud-table', {
       pageTitle,
-      rows: [],
+      complianceResult,
       errorMessage: `[aws][awsTable] ${err}`,
     });
   }
 
-  return res.render('cloud-table', { pageTitle, rows });
+  return res.render('cloud-table', { pageTitle, complianceResult });
 };
