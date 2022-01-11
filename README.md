@@ -1,5 +1,9 @@
 # cloud-security-platform-web-with-steampipe
 
+## Simple Architecture
+
+![Architecture](./images/architecture.png)
+
 ## Home
 
 ![home](./images/home.png)
