@@ -1,5 +1,4 @@
 #!/bin/bash
 
-dockerize -wait tcp://steampipe:9193 -timeout 20s
-sleep 60 # Wait for install steampipe's plugins
+dockerize -wait tcp://steampipe:9193 -timeout 30s
 npm start

@@ -7,5 +7,3 @@ echo SP_TTL=300 >> .env
 docker-compose build
 docker-compose up -d
 
-docker exec -it steampipe steampipe plugin install steampipe && docker exec -it steampipe steampipe plugin install aws
-

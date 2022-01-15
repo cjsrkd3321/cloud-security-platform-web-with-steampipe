@@ -19,7 +19,9 @@ services:
     restart: on-failure
     container_name: 'mongo'
   steampipe:
-    image: turbot/steampipe
+    build:
+      context: ./steampipe
+    image: steampipe
     container_name: 'steampipe'
     environment:
       STEAMPIPE_DATABASE_PASSWORD: ${SP_PASSWORD}
