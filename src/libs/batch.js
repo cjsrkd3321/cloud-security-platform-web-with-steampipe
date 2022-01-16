@@ -1,3 +1,4 @@
+import md5 from 'md5';
 import { pg } from '../db';
 import { DEFAULT_TTL } from '../libs/time';
 import Compliance from '../models/Compliance';
@@ -5,7 +6,12 @@ import Compliance from '../models/Compliance';
 class Batch {
   static async batchQuery(title, query) {
     try {
-      const results = (await pg.query(query)).rows;
+      const queryResults = (await pg.query(query)).rows;
+
+      const results = queryResults.map((result) => {
+        const _id = md5(JSON.stringify(result));
+        return { ...result, _id };
+      });
 
       (await Compliance.findOneAndUpdate(
         { title },
