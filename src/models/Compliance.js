@@ -9,6 +9,7 @@ const complianceSchema = new mongoose.Schema({
     maxlength: 30,
   },
   results: [{ type: Map }],
+  excepted: { type: [String], length: 32 },
   createdAt: { type: Date, required: true },
 });
 

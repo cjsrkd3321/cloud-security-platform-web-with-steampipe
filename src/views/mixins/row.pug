@@ -1,10 +1,9 @@
 mixin row(title, row)
     tr(style="background-color: rgba(0, 0, 0, 0.2);")
         each val, key in row
-            if key != '_id'
+            if key != "id"
                 td=val
             else
                 td
-                    a(href=`${title}/${val}`) 
-                        button(style="padding: 5px;") Except
-                        
+                    form(method="POST", action=`${title}/exceptions/${val}`, style="border: 0px; padding: 0px; box-shadow: none; min-width: 0%;")
+                        input(type="submit", value="Except", style="margin: 0px auto; background-color: #0097FC; font-weight: 400;")

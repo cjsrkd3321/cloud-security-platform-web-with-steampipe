@@ -9,8 +9,8 @@ class Batch {
       const queryResults = (await pg.query(query)).rows;
 
       const results = queryResults.map((result) => {
-        const _id = md5(JSON.stringify(result));
-        return { ...result, _id };
+        const id = md5(JSON.stringify(result));
+        return { ...result, id };
       });
 
       (await Compliance.findOneAndUpdate(

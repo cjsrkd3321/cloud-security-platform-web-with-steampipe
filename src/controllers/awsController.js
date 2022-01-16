@@ -19,8 +19,11 @@ export const getAwsTable = async (req, res) => {
 
   try {
     const compliance = await Compliance.findOne({ title }).lean();
-    const { createdAt, results } = compliance;
-    complianceResult = { title, results, createdAt };
+    const { createdAt, results, excepted } = compliance;
+    const newResults = results.filter(
+      (result) => !excepted.includes(result.id)
+    );
+    complianceResult = { title, newResults, createdAt };
     if (!compliance) {
       return res.render('cloud-table', {
         pageTitle,
@@ -36,4 +39,27 @@ export const getAwsTable = async (req, res) => {
   }
 
   return res.render('cloud-table', { pageTitle, complianceResult });
+};
+
+export const getAwsException = async (req, res) => {
+  return res.send('ASDF');
+};
+
+export const postAwsException = async (req, res) => {
+  const { table: title, id } = req.params;
+  const exists = await Compliance.exists({
+    $and: [{ title }, { 'results.id': id }],
+  });
+  if (!exists) {
+    return res.status(400).redirect('/');
+  }
+
+  const compliance = await Compliance.findOne({ title });
+  if (compliance.excepted.includes(id)) {
+    return res.status(400).redirect('/');
+  }
+  compliance.excepted.push(id);
+  compliance.save();
+
+  return res.status(200).redirect(`/aws/${title}`);
 };

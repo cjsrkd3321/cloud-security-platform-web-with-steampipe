@@ -7,14 +7,14 @@ block content
         h4 Last updated : #{complianceResult.createdAt}
         table(style="border: 0;")
             thead
-                each result, index in complianceResult.results
+                each result, index in complianceResult.newResults
                     if !index
                         each val, key in result
-                            if key != '_id'
+                            if key != 'id'
                                 th(style="text-align: center;")=key
                             else
                                 th(style="text-align: center;") exception
-            each result in complianceResult.results 
+            each result in complianceResult.newResults 
                 +row(complianceResult.title, result)
             else 
                 h3 Result not found.
