@@ -10,6 +10,14 @@ export const IAM_NO_MFA_USER = `
     aws_iam_credential_report 
   WHERE mfa_active IS false
 `;
+export const IAM_ROOT_ACCESS_KEY = `
+  SELECT 
+    account_id, 
+    account_access_keys_present as root_access_key_count
+  FROM 
+    aws_iam_account_summary
+  WHERE account_access_keys_present > 0
+`;
 
 // VPC
 export const VPC_SG_INGRESS_ANY_OPEN = `
@@ -42,7 +50,6 @@ export const EC2_OPTIONAL_IMDS = `
   WHERE
     metadata_options ->> 'HttpEndpoint' = 'enabled'
 `;
-
 export const EC2_PUBLIC_IP = `
   SELECT 
     arn, 
@@ -53,4 +60,31 @@ export const EC2_PUBLIC_IP = `
     aws_ec2_instance 
   WHERE 
     public_ip_address IS NOT null
+`;
+export const EC2_EBS_NOT_ENCRYPT = `
+  SELECT 
+    account_id, 
+    region, 
+    default_ebs_encryption_enabled, 
+    default_ebs_encryption_key 
+  FROM 
+    aws_ec2_regional_settings 
+  WHERE 
+    default_ebs_encryption_enabled IS false
+`;
+
+// KMS
+export const KMS_NO_ROTATE_KEY = `
+  SELECT 
+    account_id, 
+    jsonb_array_elements(aliases) ->> 'AliasName' as alias_name, 
+    enabled, 
+    id, 
+    key_rotation_enabled, 
+    key_manager 
+  FROM 
+    aws_kms_key 
+  WHERE 
+    key_manager != 'AWS' 
+    AND key_rotation_enabled IS false
 `;
