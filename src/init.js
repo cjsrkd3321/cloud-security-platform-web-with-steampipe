@@ -4,7 +4,6 @@ import './db';
 import './models/User';
 import app from './server';
 
-import './batch/awsCreateCredentialReport';
 import './batch/awsBatch';
 
 const PORT = 2000;
