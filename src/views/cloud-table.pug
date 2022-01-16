@@ -10,8 +10,11 @@ block content
                 each result, index in complianceResult.results
                     if !index
                         each val, key in result
-                            th(style="text-align: center;")=key
+                            if key != '_id'
+                                th(style="text-align: center;")=key
+                            else
+                                th(style="text-align: center;") exception
             each result in complianceResult.results 
-                +row(result)
+                +row(complianceResult.title, result)
             else 
                 h3 Result not found.

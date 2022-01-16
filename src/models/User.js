@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs/dist/bcrypt';
+import bcrypt from 'bcryptjs';
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({

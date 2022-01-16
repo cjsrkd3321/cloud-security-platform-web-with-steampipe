@@ -1,4 +1,10 @@
-mixin row(row)
+mixin row(title, row)
     tr(style="background-color: rgba(0, 0, 0, 0.2);")
-        each val, _ in row
-            td=val
+        each val, key in row
+            if key != '_id'
+                td=val
+            else
+                td
+                    a(href=`${title}/${val}`) 
+                        button(style="padding: 5px;") Except
+                        

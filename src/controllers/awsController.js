@@ -7,7 +7,7 @@ export const awsHome = async (req, res) => {
   return res.render('cloud-home', { pageTitle: 'Cloud-Home', queries });
 };
 
-export const awsTable = async (req, res) => {
+export const getAwsTable = async (req, res) => {
   const { table } = req.params;
   const pageTitle = 'Cloud-Table';
   let complianceResult = {};
