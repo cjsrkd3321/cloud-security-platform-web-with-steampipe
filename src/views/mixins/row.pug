@@ -3,7 +3,6 @@ mixin row(title, row)
         each val, key in row
             if key != "id"
                 td=val
-            else
-                td
-                    form(method="POST", action=`${title}/exceptions/${val}`, style="border: 0px; padding: 0px; box-shadow: none; min-width: 0%;")
-                        input(type="submit", value="Except", style="margin: 0px auto; background-color: #0097FC; font-weight: 400;")
+        td
+            a(href=`${title}/excepts/${val}`) 
+                button(style="padding: 5px;") Except

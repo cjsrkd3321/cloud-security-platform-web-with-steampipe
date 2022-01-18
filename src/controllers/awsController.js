@@ -42,10 +42,6 @@ export const getAwsTable = async (req, res) => {
 };
 
 export const getAwsException = async (req, res) => {
-  return res.send('ASDF');
-};
-
-export const postAwsException = async (req, res) => {
   const { table: title, id } = req.params;
   const exists = await Compliance.exists({
     $and: [{ title }, { 'results.id': id }],

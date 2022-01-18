@@ -12,8 +12,7 @@ block content
                         each val, key in result
                             if key != 'id'
                                 th(style="text-align: center;")=key
-                            else
-                                th(style="text-align: center;") exception
+                        th(style="text-align: center;") exception
             each result in complianceResult.newResults 
                 +row(complianceResult.title, result)
             else 
