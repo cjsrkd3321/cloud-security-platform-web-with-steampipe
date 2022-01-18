@@ -4,9 +4,9 @@
 
 ![Architecture](./images/architecture.png)
 
-## Home
+## Example
 
-![home](./images/home.png)
+![home](./images/example.png)
 
 ## Tech Stacks
 
