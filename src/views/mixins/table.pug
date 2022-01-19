@@ -1,0 +1,24 @@
+include row
+
+mixin table(results, isExcepted)
+    h4 Go to &rarr; 
+        if !isExcepted
+            a(href=`${results.title}/excepts`) EXCEPTION
+            h4 Last updated : #{results.complianceLastUpdatedAt}
+        else
+            a(href=`/aws/${results.title}`) COMPLIANCE
+            h4 Last updated : #{results.exceptionLastUpdatedAt}
+    h3 #{results.title}
+    table(style="border: 0;")
+        thead
+            each result, index in results.newResults
+                if !index
+                    each val, key in result
+                        if key !== 'id'
+                            th(style="text-align: center;")=key
+                    if !isExcepted
+                        th(style="text-align: center;") exception
+        each result in results.newResults 
+            +row(results.title, result, isExcepted)
+        else 
+            h3 Result not found.

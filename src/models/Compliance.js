@@ -9,8 +9,9 @@ const complianceSchema = new mongoose.Schema({
     maxlength: 30,
   },
   results: [{ type: Map }],
-  excepted: { type: [String], length: 32 },
-  createdAt: { type: Date, required: true },
+  exceptions: { type: [String], length: 32 },
+  exceptionLastUpdatedAt: { type: Date },
+  complianceLastUpdatedAt: { type: Date, required: true },
 });
 
 const Compliance = mongoose.model('Compliance', complianceSchema);

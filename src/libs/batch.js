@@ -15,12 +15,12 @@ class Batch {
 
       (await Compliance.findOneAndUpdate(
         { title },
-        { results, createdAt: Date.now() }
+        { results, complianceLastUpdatedAt: Date.now() }
       )) ??
         (await Compliance.create({
           title,
           results,
-          createdAt: Date.now(),
+          complianceLastUpdatedAt: Date.now(),
         }));
     } catch (err) {
       console.error(err);

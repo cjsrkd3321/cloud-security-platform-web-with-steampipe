@@ -1,8 +1,9 @@
 import express from 'express';
 import {
   awsHome,
-  getAwsException,
+  setAwsException,
   getAwsTable,
+  getAwsException,
 } from '../controllers/awsController';
 import { protectMiddleware } from '../middlewares';
 
@@ -14,7 +15,12 @@ awsRouter
   .all(protectMiddleware)
   .get(getAwsTable);
 awsRouter
-  .route('/:table([a-zA-Z0-9_]{5,30})/excepts/:id([a-z0-9]{32})')
+  .route('/:table([a-zA-Z0-9_]{5,30})/excepts')
+  .all(protectMiddleware)
   .get(getAwsException);
+awsRouter
+  .route('/:table([a-zA-Z0-9_]{5,30})/excepts/:id([a-z0-9]{32})')
+  .all(protectMiddleware)
+  .get(setAwsException);
 
 export default awsRouter;

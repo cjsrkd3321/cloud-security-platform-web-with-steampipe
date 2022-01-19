@@ -1,19 +1,9 @@
 extends base
-include mixins/row
+include mixins/table
 
 block content
     div(style="display: flex; flex-direction: column; align-items: center;")
-        h3 #{complianceResult.title}
-        h4 Last updated : #{complianceResult.createdAt}
-        table(style="border: 0;")
-            thead
-                each result, index in complianceResult.newResults
-                    if !index
-                        each val, key in result
-                            if key != 'id'
-                                th(style="text-align: center;")=key
-                        th(style="text-align: center;") exception
-            each result in complianceResult.newResults 
-                +row(complianceResult.title, result)
-            else 
-                h3 Result not found.
+        if complianceResults    
+            +table(complianceResults, false)
+        else
+            +table(exceptedResults, true)

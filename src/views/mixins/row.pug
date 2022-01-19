@@ -1,8 +1,9 @@
-mixin row(title, row)
+mixin row(title, row, isExcepted)
     tr(style="background-color: rgba(0, 0, 0, 0.2);")
         each val, key in row
             if key != "id"
                 td=val
-        td
-            a(href=`${title}/excepts/${val}`) 
-                button(style="padding: 5px;") Except
+        if !isExcepted
+            td
+                a(href=`${title}/excepts/${row.id}`) 
+                    button(style="padding: 5px;") Except

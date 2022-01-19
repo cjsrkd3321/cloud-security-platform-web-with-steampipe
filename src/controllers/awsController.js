@@ -10,7 +10,7 @@ export const awsHome = async (req, res) => {
 export const getAwsTable = async (req, res) => {
   const { table } = req.params;
   const pageTitle = 'Cloud-Table';
-  let complianceResult = {};
+  let complianceResults = {};
 
   const title = Object.keys(awsQueries).find((query) => query === table);
   if (!title) {
@@ -19,29 +19,29 @@ export const getAwsTable = async (req, res) => {
 
   try {
     const compliance = await Compliance.findOne({ title }).lean();
-    const { createdAt, results, excepted } = compliance;
+    const { complianceLastUpdatedAt, results, exceptions } = compliance;
     const newResults = results.filter(
-      (result) => !excepted.includes(result.id)
+      (result) => !exceptions.includes(result.id)
     );
-    complianceResult = { title, newResults, createdAt };
+    complianceResults = { title, newResults, complianceLastUpdatedAt };
     if (!compliance) {
       return res.render('cloud-table', {
         pageTitle,
-        complianceResult,
+        complianceResults,
       });
     }
   } catch (err) {
     return res.status(400).render('cloud-table', {
       pageTitle,
-      complianceResult,
+      complianceResults,
       errorMessage: `[aws][awsTable] ${err}`,
     });
   }
 
-  return res.render('cloud-table', { pageTitle, complianceResult });
+  return res.render('cloud-table', { pageTitle, complianceResults });
 };
 
-export const getAwsException = async (req, res) => {
+export const setAwsException = async (req, res) => {
   const { table: title, id } = req.params;
   const exists = await Compliance.exists({
     $and: [{ title }, { 'results.id': id }],
@@ -51,11 +51,44 @@ export const getAwsException = async (req, res) => {
   }
 
   const compliance = await Compliance.findOne({ title });
-  if (compliance.excepted.includes(id)) {
+  if (compliance.exceptions.includes(id)) {
     return res.status(400).redirect('/');
   }
-  compliance.excepted.push(id);
+  compliance.exceptions.push(id);
+  compliance.exceptionLastUpdatedAt = Date.now();
   compliance.save();
 
   return res.status(200).redirect(`/aws/${title}`);
+};
+
+export const getAwsException = async (req, res) => {
+  const { table: title } = req.params;
+  const pageTitle = 'Cloud-Table';
+  let exceptedResults = {};
+
+  try {
+    const { results, exceptions, exceptionLastUpdatedAt } =
+      await Compliance.findOne({ title }).lean();
+    const newResults = results.filter((result) =>
+      exceptions.includes(result.id)
+    );
+    exceptedResults = { title, newResults, exceptionLastUpdatedAt };
+    if (!results) {
+      return res.render('cloud-table', {
+        pageTitle,
+        exceptedResults,
+      });
+    }
+  } catch (err) {
+    return res.status(400).render('cloud-table', {
+      pageTitle,
+      exceptedResults,
+      errorMessage: `[aws][awsTable] ${err}`,
+    });
+  }
+
+  return res.render('cloud-table', {
+    pageTitle,
+    exceptedResults,
+  });
 };
