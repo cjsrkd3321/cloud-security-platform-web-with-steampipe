@@ -1,7 +1,7 @@
 // Account
 
 // IAM
-export const IAM_NO_MFA_USER = `
+export const IAM_NoMfaUser = `
   SELECT 
     user_arn, 
     password_enabled, 
@@ -10,7 +10,7 @@ export const IAM_NO_MFA_USER = `
     aws_iam_credential_report 
   WHERE mfa_active IS false
 `;
-export const IAM_ROOT_ACCESS_KEY = `
+export const IAM_RootAcessKey = `
   SELECT 
     account_id, 
     account_access_keys_present as root_access_key_count
@@ -20,7 +20,7 @@ export const IAM_ROOT_ACCESS_KEY = `
 `;
 
 // VPC
-export const VPC_SG_INGRESS_ANY_OPEN = `
+export const VPC_SgIngressAnyOpen = `
   SELECT 
     group_name, 
     group_id, 
@@ -39,7 +39,7 @@ export const VPC_SG_INGRESS_ANY_OPEN = `
 `;
 
 // EC2
-export const EC2_OPTIONAL_IMDS = `
+export const EC2_OptionalImds = `
   SELECT
     arn, 
     instance_id, 
@@ -50,7 +50,7 @@ export const EC2_OPTIONAL_IMDS = `
   WHERE
     metadata_options ->> 'HttpEndpoint' = 'enabled'
 `;
-export const EC2_PUBLIC_IP = `
+export const EC2_PublicIp = `
   SELECT 
     arn, 
     instance_id, 
@@ -61,7 +61,7 @@ export const EC2_PUBLIC_IP = `
   WHERE 
     public_ip_address IS NOT null
 `;
-export const EC2_EBS_NOT_ENCRYPT = `
+export const EC2_EbsNotEncrypt = `
   SELECT 
     account_id, 
     region, 
@@ -74,7 +74,7 @@ export const EC2_EBS_NOT_ENCRYPT = `
 `;
 
 // KMS
-export const KMS_NO_ROTATE_KEY = `
+export const KMS_NoRotateKey = `
   SELECT 
     account_id, 
     jsonb_array_elements(aliases) ->> 'AliasName' as alias_name, 
