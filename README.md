@@ -12,7 +12,7 @@
 
 - Node.js + MongoDB + Steampipe
 
-## <font color="red">WARNING</font>
+## <p style="color: #f03c15">WARNING</p>
 
 - DO NOT USE SSH FUNCTION.
 - THIS FUNCTION IS BEING TESTED NOW!!!
@@ -62,7 +62,7 @@ $ curl http://localhost:2000
   ```
 
 - <b>You need related credentials files are below when run in local machine.</b>
-  - <font color="red">Move</font> /root/.aws/credentials <font color="red">&rarr;</font> ./credentials
-  - <font color="red">Move</font> /root/.aws/config <font color="red">&rarr;</font> ./config
+  - <span style="color: #f03c15">Move</span> /root/.aws/credentials <span style="color: #f03c15">&rarr;</span> ./credentials
+  - <span style="color: #f03c15">Move</span> /root/.aws/config <span style="color: #f03c15">&rarr;</span> ./config
   - "/root" is You can switch to the path where your credentials are.
 - [Steampipe Docs](https://steampipe.io/docs)
