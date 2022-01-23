@@ -1,0 +1,29 @@
+extends base
+
+block content
+    table(style="border: 0;")
+        thead
+            each result, index in data
+                if !index
+                    each _, key in result
+                        th(style="text-align: center;")=key
+                    th(style="text-align: center;") Access
+                    th(style="text-align: center;") Command
+        each result in data
+            tr(style="background-color: rgba(0, 0, 0, 0.2);")
+                each value, _ in result
+                    td=value
+                td 
+                    a(href=`/aws/ssh/${result.instance_id}`) 
+                        if result.instance_state == "running" && result.status == "ok"
+                            button(style="padding: 5px;") Request
+                td
+                    if result.instance_state == "running" && result.status == "ok"
+                        input(type="hidden" value=`aws ssm start-session --target ${result.instance_id}` id=`${result.instance_id}`)
+                        button(style="padding: 5px;" onclick=`copyFunction('${result.instance_id}')`) Copy
+    script.
+        function copyFunction(instanceId) {
+            var copy = document.querySelector(`input#${instanceId}`);
+            copy.select();
+            navigator.clipboard.writeText(copy.value);
+        }

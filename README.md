@@ -12,6 +12,11 @@
 
 - Node.js + MongoDB + Steampipe
 
+## <font color="red">WARNING</font>
+
+- DO NOT USE SSH FUNCTION.
+- THIS FUNCTION IS BEING TESTED NOW!!!
+
 ## Usage
 
 - If you use ec2, no need credentils, config files.
